@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -11,24 +12,23 @@ import { ProductService } from '../../services/product.service';
 })
 export class HomeComponent {
   private readonly productService = inject(ProductService);
+  private readonly cartService = inject(CartService);
 
-  count = this.productService.count;
+  products = this.productService.products;
   loading = this.productService.loading;
+  cartCount = this.cartService.totalItems;
 
   constructor() {
-    this.productService.setLoading(true);
+    this.productService.setAll([
+      { id: 'p1', title: 'Demo Product', price: 99, imageUrl: '' },
+      { id: 'p2', title: 'Second Product', price: 149, imageUrl: '' },
+    ]);
+  }
 
-    setTimeout(() => {
-      this.productService.setAll([
-        {
-          id: 'p1',
-          title: 'Demo Product',
-          price: 99,
-          imageUrl: '',
-        },
-      ]);
-
-      this.productService.setLoading(false);
-    }, 1000);
+  addToCart(productId: string) {
+    const product = this.products().find((p) => p.id === productId);
+    if (product) {
+      this.cartService.addProduct(product);
+    }
   }
 }

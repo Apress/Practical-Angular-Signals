@@ -1,0 +1,14 @@
+@if (products()?.length === 0) {
+<p>No products to display.</p>
+} @else {
+<div class="product-grid">
+  @for (product of products(); track product.id) {
+  <div class="product-card">
+    <h3>{{ product.title }}</h3>
+    <p class="price">{{ product.price | currency }}</p>
+    <button (click)="addToCart(product.id)">Add to Cart</button>
+  </div>
+  }
+</div>
+
+}

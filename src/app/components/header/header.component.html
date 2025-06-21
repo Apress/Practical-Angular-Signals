@@ -1,7 +1,13 @@
 <header class="header">
   <a routerLink="/">Shop</a>
-
   <div class="header-actions">
-    🛒 {{ totalItems() }} items – {{ totalPrice() | currency }}
+    @if (!isEmpty()) { 🛒 {{ totalItems() }} items –
+    {{ totalPrice() | currency }}
+    } @if (isLoggedIn()) {
+    <span class="user-info">👤 {{ username() }}</span>
+    <button class="auth-button" (click)="logout()">Logout</button>
+    } @else {
+    <button class="auth-button" routerLink="/login">Login</button>
+    }
   </div>
 </header>

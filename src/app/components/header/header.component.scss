@@ -17,3 +17,24 @@ a {
   align-items: center;
   gap: 1rem;
 }
+
+.cart-button,
+.auth-button {
+  background: white;
+  color: #1976d2;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cart-button:hover,
+.auth-button:hover {
+  background: #e3e3e3;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}

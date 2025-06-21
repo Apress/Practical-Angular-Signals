@@ -35,8 +35,14 @@
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
   cursor: pointer;
+
+  &:disabled {
+    background: #e0e0e0;
+    cursor: not-allowed;
+  }
+  transition: background 0.3s ease;
 }
 
-.product-card button:hover {
+.product-card button:hover:not(:disabled) {
   background: #1565c0;
 }

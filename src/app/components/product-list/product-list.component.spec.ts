@@ -8,11 +8,15 @@ describe('ProductListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductListComponent]
-    })
-    .compileComponents();
+      imports: [ProductListComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProductListComponent);
+    fixture.componentRef.setInput('products', [
+      { id: '1', title: 'Product 1', price: 100, imageUrl: 'image1.jpg' },
+      { id: '2', title: 'Product 2', price: 200, imageUrl: 'image2.jpg' },
+    ]);
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

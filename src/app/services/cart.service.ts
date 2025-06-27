@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { CartItem } from '../models/cart-item.model';
 import { Product } from '../models/product.model';
 
@@ -19,6 +19,13 @@ export class CartService {
   );
 
   readonly isEmpty = computed(() => this._items().length === 0);
+
+  constructor() {
+    // Automatically persist cart to localStorage on any cart change
+    effect(() => {
+      localStorage.setItem('cart', JSON.stringify(this._items()));
+    });
+  }
 
   addProduct(product: Product) {
     const current = this._items();
